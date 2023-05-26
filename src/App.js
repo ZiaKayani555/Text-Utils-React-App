@@ -1,5 +1,6 @@
 import './App.css';
 import Navbar from './components/Navbar';
+import TextForm from './components/TextForm';
 
 function App() {
   return (
@@ -7,6 +8,10 @@ function App() {
    
 
     <Navbar tit="TextUtils" />
+    <div className='container'>
+    <TextForm headding='enter your text here to analyze '/>
+
+    </div>
 
     </>
   );
