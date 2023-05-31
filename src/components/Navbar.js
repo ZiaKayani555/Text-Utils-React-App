@@ -27,9 +27,25 @@ export default function Navbar(props) {
               </form>
             </div>
           </form>
-          <div className={`form-check form-switch mx-5 text-${props.mode === 'light'?'gray':'light'} `}>
+
+      
+          {/* dropdown for background color change */}
+          <div className="dropdown mx-4">
+            <button className="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Colored Background
+            </button>
+            <ul className="dropdown-menu">
+              <li><a className="dropdown-item" onClick={props.changegreen} href="#">Green</a></li>
+              <li><a className="dropdown-item" onClick={props.changered} href="#">Red</a></li>
+              <li><a className="dropdown-item" onClick={props.changeyellow} href="#">Yellow</a></li>
+            </ul>
+          </div>
+
+
+          {/* dark/light mode swich */}
+          <div className={`form-check form-switch mx-5 text-${props.mode === 'light' ? 'gray' : 'light'} `}>
             <input className="form-check-input" onClick={props.toggleMode} type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-              <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Enable Dark mode</label>
+            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Enable Dark mode</label>
           </div>
         </div>
       </div>
