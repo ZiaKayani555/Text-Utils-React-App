@@ -3,20 +3,21 @@ import About from './components/About';
 import Alert from './components/Alert';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes ,Link} from 'react-router-dom';
 
 function App() {
-  const [mode , setMode] =useState('dark');
-  const [alert ,setAlert] = useState(null);
-  const [colour , setClour] = useState('green');
+  const [mode, setMode] = useState('dark');
+  const [alert, setAlert] = useState(null);
+  const [colour, setClour] = useState('green');
 
-  const toggleMode = () =>{
-    if(mode ==='light'){
+  const toggleMode = () => {
+    if (mode === 'light') {
       setMode('dark');
       document.body.style.backgroundColor = '#293a52';
       showAlert('dark mode has been enabled', 'success');
     }
-    else{
+    else {
       setMode('light');
       document.body.style.backgroundColor = 'white';
       showAlert('light mode has been enabled', 'success');
@@ -25,34 +26,34 @@ function App() {
   }
 
   const setBackgroundColorr = () => {
-    if(document.body.style.backgroundColor === 'green'){
+    if (document.body.style.backgroundColor === 'green') {
       document.body.style.backgroundColor = 'blue';
       setClour('blue')
     }
-    else{
+    else {
       document.body.style.backgroundColor = 'green';
       setClour('green')
 
     }
   }
-  const showAlert =(message, type)=>{
+  const showAlert = (message, type) => {
     setAlert({
-      msg:message,
+      msg: message,
       type: type,
     })
 
     setTimeout(() => {
-          setAlert(null);
+      setAlert(null);
     }, 1500);
   }
 
-  const changegreen = ()=>{
+  const changegreen = () => {
     document.body.style.backgroundColor = '#35C649'
   }
-  const changeyellow = ()=>{
+  const changeyellow = () => {
     document.body.style.backgroundColor = '#CAB911'
   }
-  const changered = ()=>{
+  const changered = () => {
     document.body.style.backgroundColor = '#C15031'
   }
 
@@ -60,16 +61,18 @@ function App() {
   return (
     <>
 
+      <Router>
 
+        <Navbar tit="TextUtils" mode={mode} toggleMode={toggleMode} setBackgroundColor={setBackgroundColorr} changegreen={changegreen} changered={changered} changeyellow={changeyellow} />
+        <Alert alert={alert} />
+        <div className='container'>
+          <Routes>
+            <Route path="/" element={<TextForm />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </div>
 
-      <Navbar tit="TextUtils" mode={mode} toggleMode={toggleMode} setBackgroundColor={setBackgroundColorr} changegreen={changegreen} changered={changered} changeyellow={changeyellow}/>
-      <Alert alert={alert}/>
-      <div className='container'>
-        {/* <About /> */}
-        <TextForm headding='enter your text here to analyze ' mode={mode} showAlert={showAlert} />
-
-      </div>
-
+      </Router>
     </>
   );
 }
